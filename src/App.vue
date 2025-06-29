@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import axios from "axios";
 import { onMounted } from "vue";
+import Header from "./components/Header.vue";
 
 onMounted(() => {
   axios(import.meta.env.VITE_API_URL + '/imagesByTime').then((response) => {
@@ -14,9 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
-   <div class="bg-blue-500 text-white p-10 text-2xl">
-    Hello World!
-  </div>
+  <Header />
 </template>
 
 <style scoped>
