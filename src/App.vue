@@ -1,17 +1,5 @@
 <script setup lang="ts">
-import axios from "axios";
-import { onMounted } from "vue";
-import Header from "./components/Header.vue";
-
-onMounted(() => {
-  axios(import.meta.env.VITE_API_URL + '/imagesByTime').then((response) => {
-    console.log(response.data);
-    console.log(response.status);
-    console.log(response.statusText);
-    console.log(response.headers);
-    console.log(response.config);
-  });
-})
+import Header from './components/Header.vue';
 </script>
 
 <template>
