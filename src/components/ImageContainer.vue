@@ -18,9 +18,10 @@ defineProps<{
 </script>
 
 <template>
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-1 max-w-6xl">
         <div>
-            <p class="relative top-8 bg-black text-white font-extrabold px-5 w-max rounded-r-sm">{{ image.uploadedBy.name }}</p>
+            <p class="relative top-8 bg-black text-white font-extrabold px-5 w-max rounded-r-sm">{{
+                image.uploadedBy.name }}</p>
             <img :src="image.url">
         </div>
         <div class="mx-1 flex flex-row justify-between gap-2 items-center">
