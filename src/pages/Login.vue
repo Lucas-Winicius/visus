@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router';
 <template>
     <div
         class="w-screen h-[calc(100vh-56px)] animate-gradient min-h-screen bg-gradient-to-br from-black via-neutral-900 to-gray-800 flex items-center justify-center">
-        <form class="bg-white py-7 px-5 rounded-sm shadow w-4/5">
+        <form class="bg-white py-7 px-5 rounded-sm shadow sm:w-4/5 sm:-mt-10 -mt-80 w-11/12">
             <h1 class="mb-5 font-extrabold text-3xl">Que bom que você voltou!</h1>
             <div class="relative z-0 w-full mb-5 group">
                 <input type="text" name="floating_username" id="floating_username"
