@@ -82,7 +82,7 @@ function handleLogin() {
             <button type="submit"
                 class="duration-100 w-full text-white bg-black hover:bg-neutral-900 focus:ring-4 focus:outline-none focus:ring-neutral-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Entrar
             </button>
-            <p class="mt-3">Ainda não tem uma conta? <RouterLink to="/create" class="font-bold underline">Crie uma!
+            <p class="mt-3">Ainda não tem uma conta? <RouterLink to="/new" class="font-bold underline">Crie uma!
                 </RouterLink>
             </p>
         </form>
