@@ -33,6 +33,7 @@ defineProps<{
                 username: string
             },
             liked: boolean,
+            likeCount: number,
         }[]
     },
     index: number

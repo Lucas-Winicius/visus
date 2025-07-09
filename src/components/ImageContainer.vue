@@ -13,6 +13,7 @@ defineProps<{
             username: string
         },
         liked: boolean,
+        likeCount: number,
     },
 }>();
 </script>
@@ -27,8 +28,9 @@ defineProps<{
         <div class="mx-1 flex flex-row justify-between gap-2 items-center">
             <div class="flex gap-4 flex-nowrap">
                 <div class="flex items-center gap-1 font-extrabold">
-                    <v-icon scale="1.3" name="pr-heart" />
-                    <p class="text-sm">0</p>
+                    <v-icon v-if="image.likeCount" scale="1.3" name="pr-heart-fill" fill="red"/>
+                    <v-icon v-else scale="1.3" name="pr-heart" />
+                    <p class="text-sm">{{ image.likeCount }}</p>
                 </div>
                 <div class="flex items-center gap-1 font-extrabold">
                     <v-icon scale="1.3" name="io-eye-outline" />
