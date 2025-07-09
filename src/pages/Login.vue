@@ -30,7 +30,7 @@ function handleLogin() {
 
         cookies.set('token', response.data.token, {
             path: '/',
-            maxAge: 60 * 60 * 24 * 7, // 1 dia
+            maxAge: 60 * 60 * 24 * 7,
         });
 
         setTimeout(() => {
