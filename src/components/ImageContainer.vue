@@ -2,12 +2,7 @@
 import { inject, ref } from 'vue';
 import { useIntersectOnce } from '../utils/useIntersectOnce';
 import axios from 'axios';
-import Cookies from 'universal-cookie';
-
-const cookies = new Cookies();
-const token = ref('');
-
-token.value = cookies.get('token');
+import { authStore } from '../stores/authStore';
 
 const props = defineProps<{
     image: {
@@ -36,7 +31,7 @@ const triggerLikeWarning = inject('triggerLikeWarning') as () => void;
 const likeImage = () => {
     if (liked.value) return;
 
-    if (!token.value && triggerLikeWarning) {
+    if (!authStore.token.value && triggerLikeWarning) {
         triggerLikeWarning();
         return;
     }
@@ -45,7 +40,7 @@ const likeImage = () => {
         method: "POST",
         url: import.meta.env.VITE_API_URL + '/likes',
         data: {
-            "token": token.value,
+            "token": authStore.token.value,
             "imageId": props.image.id
         }
     }).then(() => {
@@ -76,7 +71,7 @@ useIntersectOnce(imageRef, () => { incrementView() })
         <div class="mx-1 flex flex-row justify-between gap-2 items-center">
             <div class="flex gap-4 flex-nowrap">
                 <div class="flex items-center gap-1 font-extrabold">
-                    <v-icon v-if="likeCount" scale="1.3" name="pr-heart-fill" fill="red" />
+                    <v-icon v-if="liked" scale="1.3" name="pr-heart-fill" fill="red" />
                     <v-icon v-else scale="1.3" name="pr-heart" @click="likeImage" class="cursor-pointer" />
                     <p class="text-sm">{{ likeCount }}</p>
                 </div>

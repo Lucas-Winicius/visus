@@ -4,10 +4,9 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useToast } from 'primevue/usetoast';
 import { useRouter } from 'vue-router';
-import Cookies from 'universal-cookie';
+import { authStore } from '../stores/authStore'
 
 const router = useRouter();
-const cookies = new Cookies();
 
 const toast = useToast();
 
@@ -30,21 +29,13 @@ function handleNew() {
             return toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Ocorreu um erro ao verificar suas credenciais.', life: 3000, group: 'responsive', });
         }
 
-        cookies.set('token', response.data.token, {
-            path: '/',
-            maxAge: 60 * 60 * 24 * 7,
-        });
-
-        cookies.set('username', response.data.data.username, {
-            path: '/',
-            maxAge: 60 * 60 * 24 * 7,
-        });
+        authStore.setToken(response.data.token)
+        authStore.setUsername(response.data.data.username)
 
         toast.add({ severity: 'success', summary: `Olá, ${response.data.data.name}!`, detail: 'Seja bem-vindo(a)! Aguarde, você será redirecionado(a) em breve.', life: 8000, group: 'responsive', });
 
         setTimeout(() => {
             router.push('/');
-            router.go(0);
         }, 8000);
 
     }).catch(() => {

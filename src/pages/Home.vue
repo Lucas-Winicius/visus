@@ -2,14 +2,9 @@
 import axios from 'axios';
 import { onMounted, provide, ref } from 'vue';
 import ImagesGroup from '../components/ImagesGroup.vue';
-import Cookies from 'universal-cookie';
+import { authStore } from '../stores/authStore'
 
-const cookies = new Cookies();
 const imagesData = ref([]);
-const token = ref('');
-
-token.value = cookies.get('token');
-
 const showLikeWarning = ref(false);
 
 function triggerLikeWarning() {
@@ -23,13 +18,12 @@ onMounted(() => {
     axios({
         url: import.meta.env.VITE_API_URL + '/imagesByTime',
         params: {
-            token: token.value
+            token: authStore.token.value
         }
     }).then((response) => {
         imagesData.value = response.data
     });
 })
-
 </script>
 
 <template>
