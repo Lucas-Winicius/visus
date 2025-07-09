@@ -38,13 +38,13 @@ function handleLogin() {
             maxAge: 60 * 60 * 24 * 7,
         });
 
+        toast.add({ severity: 'success', summary: `Olá, ${response.data.data.name}!`, detail: 'Estamos felizes em lhe ter de volta! Aguarde, você será redirecionado em breve.', life: 8000, group: 'responsive', });
+
         setTimeout(() => {
             router.push('/');
             router.go(0);
         }, 8000);
 
-
-        return toast.add({ severity: 'success', summary: `Olá, ${response.data.data.name}!`, detail: 'Estamos felizes em lhe ter de volta! Aguarde você será redirecionado em breve.', life: 8000, });
     }).catch((response) => {
         if (response.status === 401) {
             return toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Credenciais inválidas.', life: 3000, group: 'responsive', });

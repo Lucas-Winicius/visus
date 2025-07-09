@@ -21,6 +21,7 @@ defineProps<{
         year: number,
         month: number,
         images: {
+            id: number,
             url: string,
             title: string,
             description: string,
