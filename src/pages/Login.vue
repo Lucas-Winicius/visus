@@ -3,6 +3,11 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useToast } from 'primevue/usetoast';
+import { useRouter } from 'vue-router';
+import Cookies from 'universal-cookie';
+
+const router = useRouter();
+const cookies = new Cookies();
 
 const toast = useToast();
 
@@ -10,7 +15,7 @@ const username = ref('')
 const password = ref('')
 
 function handleLogin() {
-    toast.add({ severity: 'info', summary: 'Info', detail: 'Message Content', life: 3000 });
+    toast.add({ severity: 'info', summary: 'Aguarde...', detail: 'Estamos verificando suas credenciais.', life: 3000 });
     axios({
         url: import.meta.env.VITE_API_URL + '/user/login',
         method: "POST",
@@ -18,7 +23,28 @@ function handleLogin() {
             username: username.value,
             password: password.value
         }
-    }).then(response => { console.log(response.data); })
+    }).then(response => {
+        if (response.status !== 200) {
+            return toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Ocorreu um erro ao verificar suas credenciais.', life: 3000 });
+        }
+
+        cookies.set('token', response.data.token, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7, // 1 dia
+        });
+
+        setTimeout(() => {
+            router.push('/')
+        }, 8000);
+
+        return toast.add({ severity: 'success', summary: `Olá, ${response.data.data.name}!`, detail: 'Estamos felizes em lhe ter de volta! Aguarde você será redirecionado em breve.', life: 8000, });
+    }).catch((response) => {
+        if (response.status === 401) {
+            return toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Credenciais inválidas.', life: 3000 });
+        }
+
+        toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Ocorreu um erro ao verificar suas credenciais.', life: 3000 });
+    })
 }
 
 </script>
