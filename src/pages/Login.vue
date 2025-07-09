@@ -15,7 +15,7 @@ const username = ref('')
 const password = ref('')
 
 function handleLogin() {
-    toast.add({ severity: 'info', summary: 'Aguarde...', detail: 'Estamos verificando suas credenciais.', life: 3000 });
+    toast.add({ severity: 'info', summary: 'Aguarde...', detail: 'Estamos verificando suas credenciais.', life: 3000, group: 'responsive', });
     axios({
         url: import.meta.env.VITE_API_URL + '/user/login',
         method: "POST",
@@ -25,7 +25,7 @@ function handleLogin() {
         }
     }).then(response => {
         if (response.status !== 200) {
-            return toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Ocorreu um erro ao verificar suas credenciais.', life: 3000 });
+            return toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Ocorreu um erro ao verificar suas credenciais.', life: 3000, group: 'responsive', });
         }
 
         cookies.set('token', response.data.token, {
@@ -33,17 +33,24 @@ function handleLogin() {
             maxAge: 60 * 60 * 24 * 7,
         });
 
+        cookies.set('username', response.data.data.username, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7,
+        });
+
         setTimeout(() => {
-            router.push('/')
+            router.push('/');
+            router.go(0);
         }, 8000);
+
 
         return toast.add({ severity: 'success', summary: `Olá, ${response.data.data.name}!`, detail: 'Estamos felizes em lhe ter de volta! Aguarde você será redirecionado em breve.', life: 8000, });
     }).catch((response) => {
         if (response.status === 401) {
-            return toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Credenciais inválidas.', life: 3000 });
+            return toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Credenciais inválidas.', life: 3000, group: 'responsive', });
         }
 
-        toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Ocorreu um erro ao verificar suas credenciais.', life: 3000 });
+        toast.add({ severity: 'error', summary: 'Ooopss!', detail: 'Ocorreu um erro ao verificar suas credenciais.', life: 3000, group: 'responsive', });
     })
 }
 

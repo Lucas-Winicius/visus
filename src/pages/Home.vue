@@ -5,10 +5,10 @@ import ImagesGroup from '../components/ImagesGroup.vue';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-
-
 const imagesData = ref([]);
-const token = ref(cookies.get('token'));
+const token = ref('');
+
+token.value = cookies.get('token');
 
 onMounted(() => {
     axios({

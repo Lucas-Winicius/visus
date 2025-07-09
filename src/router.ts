@@ -16,7 +16,7 @@ const router = createRouter({
 });
 
 // Protege as rotas com `requiresAuth`
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   const token = cookies.get("token");
   if (to.path === "/login" && token) {
     next("/");

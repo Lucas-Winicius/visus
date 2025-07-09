@@ -6,7 +6,7 @@ import Header from './components/Header.vue';
 <template>
   <Header />
   <router-view />
-  <Toast />
+  <Toast group="responsive" class="max-h-0 max-w-[90vw] sm:max-w-md w-full left-4 sm:left-auto right-4 sm:right-auto bottom-4 sm:bottom-auto" />
 </template>
 
 <style scoped>
