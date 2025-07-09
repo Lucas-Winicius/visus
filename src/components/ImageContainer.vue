@@ -34,13 +34,13 @@ const views = ref(props.image.views)
 const triggerLikeWarning = inject('triggerLikeWarning') as () => void;
 
 const likeImage = () => {
+    if (liked.value) return;
+
     if (!token.value && triggerLikeWarning) {
         triggerLikeWarning();
         return;
     }
 
-    likeCount.value++
-    liked.value = true
     axios({
         method: "POST",
         url: import.meta.env.VITE_API_URL + '/likes',
@@ -48,6 +48,9 @@ const likeImage = () => {
             "token": token.value,
             "imageId": props.image.id
         }
+    }).then(() => {
+        likeCount.value++
+        liked.value = true
     })
 }
 
