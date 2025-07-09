@@ -2,16 +2,22 @@
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import ImagesGroup from '../components/ImagesGroup.vue';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 
 const imagesData = ref([]);
+const token = ref(cookies.get('token'));
 
 onMounted(() => {
-    axios(import.meta.env.VITE_API_URL + '/imagesByTime').then((response) => {
+    axios({
+        url: import.meta.env.VITE_API_URL + '/imagesByTime',
+        params: {
+            token: token.value
+        }
+    }).then((response) => {
         imagesData.value = response.data
-        console.log(response.status);
-        console.log(response.statusText);
-        console.log(response.headers);
-        console.log(response.config);
     });
 })
 
