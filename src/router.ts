@@ -2,12 +2,14 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "./pages/Login.vue";
 import Home from "./pages/Home.vue";
 import Cookies from "universal-cookie";
+import New from "./pages/New.vue";
 
 const cookies = new Cookies();
 
 const routes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
+  { path: "/new", component: New },
 ];
 
 const router = createRouter({

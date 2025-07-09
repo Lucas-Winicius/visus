@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, onMounted, ref } from 'vue';
+import { inject, ref } from 'vue';
 import { useIntersectOnce } from '../utils/useIntersectOnce';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
