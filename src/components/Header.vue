@@ -5,6 +5,7 @@ import { ref } from 'vue';
 const cookies = new Cookies();
 const token = ref(cookies.get('token') || '');
 const username = ref(cookies.get('username') || '');
+const currentDomain = window.location.host;
 
 </script>
 
@@ -17,7 +18,7 @@ const username = ref(cookies.get('username') || '');
             <p>Fazer login</p>
         </RouterLink>
         <div v-else class="flex flex-row gap-1">
-            <p>winicius.xyz</p>
+            <p>{{ currentDomain }}</p>
             <p>/</p>
             <p class="font-bold">{{ username }}</p>
         </div>
