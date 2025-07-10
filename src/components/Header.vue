@@ -14,7 +14,7 @@ const currentDomain = window.location.host;
             <p>Fazer login</p>
         </RouterLink>
         <div v-else class="flex flex-row gap-1">
-            <p>{{ currentDomain }}</p>
+            <p>Winicius.xyz</p>
             <p>/</p>
             <p class="font-bold">{{ authStore.username.value }}</p>
         </div>
