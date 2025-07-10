@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { authStore } from '../stores/authStore';
 
-const currentDomain = window.location.host;
+//const currentDomain = window.location.host;
 
 </script>
 
