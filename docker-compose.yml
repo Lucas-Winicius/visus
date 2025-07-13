@@ -1,0 +1,7 @@
+services:
+  visus-frontend:
+    build: .
+    container_name: visus-frontend
+    ports:
+      - "8383:80"
+    restart: unless-stopped
