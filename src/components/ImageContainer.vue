@@ -63,10 +63,10 @@ useIntersectOnce(imageRef, () => { incrementView() })
 
 <template>
     <div class="flex flex-col gap-1 max-w-6xl">
-        <div>
+        <div class="w-full">
             <p class="relative top-8 bg-black text-white font-extrabold px-5 w-max rounded-r-sm">{{
                 props.image.uploadedBy.name }}</p>
-            <img :src="props.image.url" ref="imageRef" @dblclick="likeImage">
+            <img v-lazy="props.image.url" ref="imageRef" @dblclick="likeImage" class="w-full">
         </div>
         <div class="mx-1 flex flex-row justify-between gap-2 items-center">
             <div class="flex gap-4 flex-nowrap">
